@@ -6,7 +6,8 @@ namespace KafkaTester
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var executor = new Executor();
+            executor.Run();
         }
     }
 }
