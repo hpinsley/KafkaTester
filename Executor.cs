@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json;
 
 namespace KafkaTester
 {
@@ -21,10 +22,10 @@ namespace KafkaTester
 
             foreach (var security in securities)
             {
-                var key = Newtonsoft.Json.JsonConvert.SerializeObject(security.SecurityMasterId);
-                var body = Newtonsoft.Json.JsonConvert.SerializeObject(security);
-                Console.WriteLine($"Key: {key} Body: {body}");
-                this.messageProducer.ProduceMessage(topic, key, body);
+                var key = JsonConvert.SerializeObject(security.SecurityMasterId);
+                var value = JsonConvert.SerializeObject(security);
+                Console.WriteLine($"Key: {key} Body: {value}");
+                this.messageProducer.ProduceMessage(topic, key, value);
             }
         }
     }
