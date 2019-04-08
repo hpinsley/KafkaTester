@@ -17,6 +17,25 @@ namespace KafkaTester
         internal void Run()
         {
             Console.WriteLine("Running...");
+            WriteAllSecurities();
+            WriteRandomPositions(10);
+        }
+
+        private void WriteRandomPositions(int count)
+        {
+            var positions = this.mockDb.GenerateRandomPositions(count);
+            var topic = "Positions";
+
+            foreach (var position in positions)
+            {
+                var key = JsonConvert.SerializeObject(position.SecurityMasterId);
+                var value = JsonConvert.SerializeObject(position);
+                this.messageProducer.ProduceMessage(topic, key, value);
+            }
+        }
+
+        private void WriteAllSecurities()
+        {
             var securities = this.mockDb.GetAllSecurities();
             var topic = "SecurityMaster";
 

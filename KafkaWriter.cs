@@ -31,7 +31,7 @@ namespace KafkaTester
             };
 
             var result = this.producer.ProduceAsync(topic, message).Result;
-            Console.WriteLine($"Result of producing key {key} is {result}");
+            Console.WriteLine($"Produced {topic} key {key} at offset {result.Offset} ");
         }
     }
 }
